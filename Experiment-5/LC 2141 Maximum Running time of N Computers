@@ -1,0 +1,32 @@
+class Solution {
+public:
+    bool check (int n, vector<int>& batteries, long long total){
+        long long totalEnergy = 0;
+        for (int x : batteries){
+            totalEnergy += min((long long)x, total);
+            if (totalEnergy >= (long long)n * total){
+                return true;
+            }
+        }
+        return totalEnergy >= (long long)n * total;
+    }
+
+    long long maxRunTime(int n, vector<int>& batteries) {
+        long long left = 0, right = 0;
+        for (int x : batteries){
+            right = right + x;
+        }
+        right = right / n;
+
+        while (left < right){
+            long long mid = (left + right + 1) / 2;
+            if (check(n, batteries, mid)){
+                left = mid;
+            }
+            else{
+                right = mid - 1;
+            }
+        }
+        return left;
+    }
+};
