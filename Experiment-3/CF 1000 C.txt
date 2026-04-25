@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+map<ll,ll>M;
+ll A[200005],x,y,n,l;
+ 
+int main(){
+    cin>>n;
+    for(l=n;l>=1;--l){
+        cin>>x>>y;
+        ++M[x]; 
+        --M[y+1];
+    }
+    x=0;
+    for(auto it:M){
+        A[x]+=it.first-l;
+        l=it.first;
+        x+=it.second;
+    }
+    for(l=1;l<=n;++l) cout<<A[l]<<" ";
+    return 0;
+}
